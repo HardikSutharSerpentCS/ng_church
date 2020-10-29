@@ -1,37 +1,43 @@
 <odoo>
 <data>
-
-    <template id="church_pledges_report">
-        <t t-call="report.html_container">
-            <t t-foreach="docs" t-as="doc">
-                <t t-call="report.external_layout">
-                    <div class="page">
-                        <t t-foreach="presenter(doc)" t-as="pledge">
-                            <h3 class="text-center" style="text-transform:uppercase"><b><u><span t-field="pledge.name.name"/></u></b></h3>
-                        </t>
-                        <table class="table table-condensed">
+    <template id="church_pledges_report_template">
+        <t t-call="web.external_layout">
+              <t t-foreach="doc" t-as="docs">
+                <div class="page">
+                    <h2 class="text-center" style="text-transform:uppercase">Pledge Payment REPORT</h2>
+                    <h5 class="text-center" style="text-transform:uppercase"><u><span t-esc="docs.name.name"/></u></h5>
+                    <table class="table" style="width:100%;">
+                    <thead>
+                        <tr class="row">
+                            <th width="150px" margin-left="150px">Name</th>
+                            <th width="150px">Pledger</th>
+                            <th width="150px">Pledge Amount</th>
+                            <th width="150px">Amount Paid</th>
+                            <th width="150px">Total Balance</th>
+                        </tr>
+                    </thead>
+                  <tbody class='sale_tbody'>
+                        <t t-foreach="doc" t-as="pledges">
                             <tr class="row">
-                                <td>Name</td>
-                                <td>Pledge Amount</td>
-                                <td>Amount Paid</td>
-                                <td>Total Balance</td>
-                            </tr>
-                            <t t-foreach="presenter(doc)" t-as="pledge">
-                                <t t-foreach="pledge.pledge_line_ids" t-as="pledges">
-                                    <tr class="row">
-                                        <td><span t-field="pledges.pledger.name"/></td>
-                                        <td><span t-field="pledges.amount"/></td>
-                                        <td><span t-field="pledges.paid"/></td>
-                                        <td><span t-field="pledges.balance"/></td>
-                                     </tr>
-                                </t>
-
-                            </t>
-                        </table>
-                    </div>
-                </t>
+                                <td width="150px" margin-left="150px"><span t-field="pledges.pledge_line_ids.name"/></td>
+                                <td width="150px"><span t-esc="pledges.pledge_line_ids.pledger.name"/></td>
+                                <td width="150px"><span t-esc="pledges.pledge_line_ids.amount"/></td>
+                                <td width="150px"><span t-field="pledges.pledge_line_ids.paid"/></td>
+                                <td width="150px"><span t-field="pledges.pledge_line_ids.balance"/></td>
+                             </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
             </t>
         </t>
     </template>
+    <template id="church_pledges_report">
+          <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="doc">
+                  <t t-call="ng_church.church_pledges_report_template"/>
+              </t>
+          </t>
+        </template>
 </data>
 </odoo>

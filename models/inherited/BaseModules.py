@@ -85,7 +85,6 @@ class Company(models.Model):
     pledge_account = fields.Many2one(
         'account.account', string="Account", domain=account)
     transit_account = fields.Many2one('account.account', string='Account',
-                                      required=True,
                                       domain=[('user_type_id', '=', 5)])
 
     @api.constrains('email')
@@ -96,14 +95,16 @@ class Company(models.Model):
             if result.match(self.email) is None:
                 raise ValidationError('Please enter a valid email address')
 
-    @api.constrains('phone')
-    def _check_valid_phone(self, limit=11):
-        if self.phone:
-            if len(self.phone) > 11:
-                raise ValidationError('Please enter a valid phone number')
-            result = re.compile(r"\d{11}")
-            if result.match(self.phone) is None:
-                raise ValidationError('Please enter a valid phone number')
+    # Not needed because in other country phone number greater than 11 digit.
+
+    # @api.constrains('phone')
+    # def _check_valid_phone(self, limit=11):
+    #     if self.phone:
+    #         if len(self.phone) > 11:
+    #             raise ValidationError('Please enter a valid phone number')
+    #         result = re.compile(r"\d{11}")
+    #         if result.match(self.phone) is None:
+    #             raise ValidationError('Please enter a valid phone number')
 
 
 class ResPartner(models.Model):

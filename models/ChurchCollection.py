@@ -69,16 +69,18 @@ class DonationLine(models.Model):
     def _prepare_account_voucher(self):
         """Generate Account Voucher."""
         company = self.env.user and self.env.user.company_id or False
-        voucher = voucher.create({
+        voucher = self.env['account.payment'].create({
             'company_id': company and company.id or False,
             'partner_id': self.env.user.partner_id.id,
-            'pay_now': 'pay_now',
-            'account_id': company and company.transit_account and
-            company.transit_account.id or False,
+            # 'pay_now': 'pay_now',
+            # 'account_id': company and company.transit_account and
+            # company.transit_account.id or False,
+            'payment_method_id' : self.env.ref("account.account_payment_method_manual_in").id,
             'journal_id': company and company.donation_journal and
             company.donation_journal.id or False,
             'name': '{} Donation'.format(self.donor_id.name or 'Anonymous'),
-            'voucher_type': 'sale'
+            'payment_type': 'inbound',
+            'amount' : self.amount
 
         })
         return voucher
@@ -128,6 +130,7 @@ class Tithe(models.Model):
                 'Tithes', limit=1)
             category_id, category_name = category.pop(0)
             return category_id
+            
 
     name = fields.Many2one('ng_church.collection', string='Collection',
                            default=_compute_default_collection)
@@ -322,7 +325,15 @@ class Pledge(models.Model):
     church_id = fields.Many2one('res.company', default=parish)
     pledge_line_ids = fields.One2many('ng_church.pledge_line', 'pledge_id',
                                       string='Pledges')
-
+    @api.model
+    def _get_report_values(self, docids, data=None):
+        docs = self.env['ng_church.pledge'].browse(docids)
+        return {
+        'doc_ids': docs.ids,
+        'doc_model': 'ng_church.pledge',
+        'docs': self.env['ng_church.pledge_line'].browse(docids),
+        'presenter': self.reports_presenter
+        }
 
 class PledgeLine(models.Model):
     """."""
@@ -415,11 +426,13 @@ class PledgeLine(models.Model):
 
     def print_report(self):
         """Direct Report printing."""
-        return self.env['report'].get_action(self,
+        return self.env['ir.actions.report'].report_action(self,
                                              'ng_church.print_pledge_report')
 
     def _prepare_account_voucher(self):
         """Generate Account Invoice."""
+        print(":::::::;self",self)
+        2/0
         company = self.env.user.company_id
         voucher = voucher.create({
             'partner_id': company.partner_id.id,
@@ -430,6 +443,7 @@ class PledgeLine(models.Model):
             'voucher_type': 'sale'
 
         })
+
         return voucher
 
     def _prepare_account_voucher_line(self, voucher_id):

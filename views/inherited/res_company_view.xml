@@ -33,7 +33,7 @@
                                 <field name="pledge_account"/>
                             </group>
                             <group string="Transit Account">
-                                <field name="transit_account"/>
+                                <field name="transit_account" required="True"/>
                             </group>
                     </group>
                     </page>

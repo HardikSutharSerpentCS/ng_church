@@ -12,7 +12,7 @@ class FollowupLog(models.TransientModel):
     _name = 'ng_church.followup_log'
     _description = "NG Church Followup Log"
 
-    activity_id = fields.Many2one('crm.activity', string='Next Activity',
+    activity_id = fields.Many2one('mail.activity.type', string='Next Activity',
                                   default=_default_activity_id)
     summary = fields.Char('Summary')
     note = fields.Html('Note')

@@ -16,20 +16,29 @@ class ChurchDonationLineAbstractModel(models.AbstractModel):
         """donation_caculator."""
         return sum(donation.amount for donation in model)
 
+    # @api.model
+    # def render_html(self, docids, data=None):
+    #     """."""
+    #     name = 'ng_church.church_donation_report'
+    #     report_obj = self.env['report']
+    #     report = report_obj._get_report_from_name(name)
+    #     docargs = {
+    #         'doc_ids': docids,
+    #         'doc_model': report.model,
+    #         'docs': self.env['ng_church.donation_line'].browse(docids),
+    #         'donation_caculator': self.donation_caculator
+    #     }
+    #     return report_obj.render(name, docargs)
+        
     @api.model
-    def render_html(self, docids, data=None):
-        """."""
-        name = 'ng_church.church_donation_report'
-        report_obj = self.env['report']
-        report = report_obj._get_report_from_name(name)
-        docargs = {
-            'doc_ids': docids,
-            'doc_model': report.model,
-            'docs': self.env['ng_church.donation_line'].browse(docids),
-            'donation_caculator': self.donation_caculator
+    def _get_report_values(self, docids, data=None):
+        docs = self.env['ng_church.donation'].browse(docids)
+        return {
+        'doc_ids': docs.ids,
+        'doc_model': 'ng_church.offering',
+        'docs': self.env['ng_church.donation_line'].browse(docids),
+        'donation_caculator': self.donation_caculator
         }
-        return report_obj.render(name, docargs)
-
 
 class DonationReportWizard(models.Model):
     """."""

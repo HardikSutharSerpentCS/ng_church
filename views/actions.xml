@@ -201,7 +201,7 @@
             <field name="res_model">res.partner</field>
 			<field name="domain">[('membership_status_id','=',1)]</field>
             <field name="context">{"search_default_is_church_member": 0, "default_is_church_member": False}</field>
-			<field name="view_mode">kanban</field>
+			<field name="view_mode">kanban,form,tree</field>
         </record>
 
 

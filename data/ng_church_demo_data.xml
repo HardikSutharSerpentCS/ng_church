@@ -1,0 +1,17 @@
+<odoo>
+    <data>   
+      <record id="service_1" model="ng_church.program">
+        <field name="name">prayer</field>
+        <field name="days">Monday</field>
+        <field name="start">10.00</field>
+        <field name="end">10.30</field>
+      </record>
+
+      <record id="minister_1" model="ng_church.pastor">
+        <field name="name">felix</field>
+        <field name="lastname">xavier</field>
+        <field name="minister_hierarchy">minister</field>
+        <field name="personal_email">felixxavier@gmail.com</field>
+      </record>
+    </data>
+</odoo>      

@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <template id="church_offering_report">
-            <t t-call="report.html_container">
-                <t t-foreach="docs[0]" t-as="doc">
-                    <t t-call="report.external_layout">
+        <template id="church_offering_report_template">
+                    <t t-call="web.external_layout">
+                      <t t-foreach="doc" t-as="docs">
                         <div class="page">
                             <h2 class="text-center" style="text-transform:uppercase">Offering REPORT</h2>
-                            <h5 class="text-center" style="text-transform:uppercase"><u><span t-field="doc.offering_id.service_id.name"/></u></h5>
-                            <table class="table table-condensed">
+                            <h5 class="text-center" style="text-transform:uppercase"><u><span t-field="docs.offering_id.service_id.name"/></u></h5>
+                            <table class="table" style="width:100%;">
+                              <thead>
                                <tr class="row">
-                                   <td>Date</td>
-                                   <td></td>
-                                   <td></td>
-                                   <td>Amount</td>
+                                   <th width="150px" margin-left="150px">Date</th>
+                                   <th width="150px">Name</th>
+                                   <th width="150px">Section</th>
+                                   <th width="150px">Amount</th>
                                </tr>
+                             </thead>
+                             <tbody class='sale_tbody'>
                                 <t t-foreach="docs" t-as="offering">
                                     <tr class="row">
-                                        <td><span t-field="offering.date"/></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><span t-field="offering.amount"/></td>
+                                        <td width="150px" margin-left="150px"><span t-field="offering.date"/></td>
+                                        <td width="150px"><span t-esc="docs.offering_id.name.name"/></td>
+                                        <td width="150px"><span t-esc="docs.offering_id.section_id.name"/></td>
+                                        <td width="150px"><span t-field="offering.amount"/></td>
                                     </tr>
                                </t>
                                   <tr class="row">
-                                       <td></td>
-                                       <td></td>
-                                       <td><b>Total</b></td>
-                                       <td><b t-esc="offering_caculator(docs)"/></td>
+                                       <td width="150px" margin-left="150px"></td>
+                                       <td width="150px"></td>
+                                       <td width="150px"><b>Total</b></td>
+                                       <td width="150px"><b t-esc="offering_caculator(docs)"/></td>
                                    </tr>
+                              </tbody>
                             </table>
                         </div>
                     </t>
-                </t>
             </t>
+        </template>
+        <template id="church_offering_report">
+          <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="doc">
+                  <t t-call="ng_church.church_offering_report_template"/>
+              </t>
+          </t>
         </template>
     </data>
 </odoo>

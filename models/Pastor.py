@@ -28,8 +28,7 @@ class Pastor(models.Model):
                                         default='minister')
     name = fields.Char(string='First Name')
     lastname = fields.Char(string='Last Name')
-    users_id = fields.Many2one('res.users', string='User\'s Name',
-                               required=True)
+    users_id = fields.Many2one('res.users', string='User\'s Name')
     pastor_hierarchy = fields.Selection(selection=pastor_harachies,
                                         string='Position')
     lead_pastor = fields.Boolean(string='Lead Pastor')
@@ -55,13 +54,13 @@ class Pastor(models.Model):
             if result.match(ng_pastor.personal_email) is None:
                 raise ValidationError('Please enter a valid email address')
 
-    @api.constrains('personal_phone')
-    def _check_valid_phone(self, limit=11):
-        """Method to check phone validation."""
-        for ng_pastor in self:
-            if ng_pastor.personal_phone:
-                if len(ng_pastor.personal_phone) > 11:
-                    raise ValidationError('Please enter a valid phone number')
-                result = re.compile(r"\d{11}")
-                if result.match(ng_pastor.personal_phone) is None:
-                    raise ValidationError('Please enter a valid phone number')
+    # @api.constrains('personal_phone')
+    # def _check_valid_phone(self, limit=11):
+    #     """Method to check phone validation."""
+    #     for ng_pastor in self:
+    #         if ng_pastor.personal_phone:
+    #             if len(ng_pastor.personal_phone) > 11:
+    #                 raise ValidationError('Please enter a valid phone number')
+    #             result = re.compile(r"\d{11}")
+    #             if result.match(ng_pastor.personal_phone) is None:
+    #                 raise ValidationError('Please enter a valid phone number')

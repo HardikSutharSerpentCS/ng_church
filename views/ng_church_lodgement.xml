@@ -6,11 +6,12 @@
             <field name='model'>ng_church.lodgement</field>
             <field name='type'>form</field>
             <field name='arch' type='xml'>
+                <form>
                 <header>
                     <button name="lodge" string='Post Lodgement' type='object' class="oe_highlight" attrs="{'invisible':[('state', '=', 'posted')]}"/>
                     <field name="state" widget="statusbar"/>
                 </header>
-                <form>
+                
                 <sheet>
                     <group>
                         <group>

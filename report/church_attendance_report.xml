@@ -3,57 +3,73 @@
 <data>
 
     <template id="church_attendance_report">
-        <t t-call="report.html_container">
-            <t t-foreach="attendance_line_mutator(docs)[-1]" t-as="doc">
-                <t t-call="report.external_layout">
+        <t t-call="web.html_container">
+            <t t-foreach="attendance_line_mutator(docs)[0]" t-as="doc">
+                <t t-call="web.external_layout">
                     <div class="page">
                         <h2 class="text-center" style="text-transform:uppercase">ATTENDANCE REPORT</h2>
                         <h5 class="text-center" style="text-transform:uppercase"><u><span t-field="doc.attendance_id.name"/></u></h5>
-                        <table class="table table-condensed">
-                            <tr class="row">
-                                <td>Date</td>
-                                <td>Male</td>
-                                <td>Female</td>
-                                <td>Children</td>
-                                <td>Guest</td>
-                                <td>Total</td>
+                        <table class="table" >
+                            <tr class="row" >
+                                <th width="150px" margin-left="150px">Date</th>
+                                <th width="150px">Church Section</th>
+                                <th width="150px">Male</th>
+                                <th width="150px">Female</th>
+                                <th width="150px">Children</th>
+                                <th width="150px">Guest</th>
+                                <th width="150px">Total</th>
                             </tr>
-                         <t t-foreach="attendance_line_mutator(docs)[0]" t-as="line">
-                            <tr class="row">
-                                <td>
-                                    <t t-if="line.name">
-                                        <span t-field="line.name"/>
-                                    </t>
-                                 </td>
-                                <td>
-                                    <t t-if="line.male">
-                                        <span t-field="line.male"/>
-                                    </t>
-                                </td>
-                                <td>
-                                    <t t-if="line.female">
-                                        <span t-field="line.female"/>
-                                     </t>
-                                </td>
-                                <td>
-                                    <t t-if="line.children">
-                                        <span t-field="line.children"/>
-                                     </t>
-                                 </td>
-                                <td>
-                                    <t t-if="line.guest">
-                                        <span t-field="line.guest"/>
-                                     </t>
-                                 </td>
-                                <td><span t-esc="line.total"/></td>
-                            </tr>
+                         <t t-foreach="attendance_line_mutator(docs)[1::]" t-as="line_att">
+                            <t t-foreach="line_att" t-as="line">
+                                <tr class="row">
+                                    <td width="130px">
+                                        <t t-if="line.name">
+                                            <span t-field="line.name"/>
+                                        </t>
+                                     </td>
+                                     <td width="130px">
+                                        <t t-if="line.section_id">
+                                            <span t-field="line.section_id"/>
+                                        </t>
+                                     </td>
+                                    <td width="130px">
+                                        <t t-if="line.male">
+                                            <span t-field="line.male"/>
+                                        </t>
+                                        <span t-if="not line.male"><t t-esc="0.0" /></span>
+                                    </td>
+                                    <td width="130px">
+                                        <t t-if="line.female">
+                                            <span t-field="line.female"/>
+                                         </t>
+                                         <span t-if="not line.female"><t t-esc="0.0" /></span>
+                                    </td>
+                                    <td width="130px">
+                                        <t t-if="line.children">
+                                            <span t-field="line.children"/>
+                                         </t>
+                                         <span t-if="not line.children"><t t-esc="0.0" /></span>
+                                     </td>
+                                    <td width="130px">
+                                        <t t-if="line.guest">
+                                            <span t-field="line.guest"/>
+                                         </t>
+                                         <span t-if="not line.guest"><t t-esc="0.0" /></span>
+                                     </td>
+                                    <td><span t-esc="line.total"/></td>
+                                </tr>
+                            </t>
                         </t>
                         <tr class="row">
-                            <t t-foreach="attendance_census(docs)" t-as="population">
-                                <td><span t-esc="population"/></td>
-                            </t>
+                            <td width="150px"></td>
+                            <td width="130px"><span t-esc="attendance_census(docs)[0]"/></td>
+                            <td width="130px"><span t-esc="attendance_census(docs)[1]"/></td>
+                            <td width="130px"><span t-esc="attendance_census(docs)[2]"/></td>
+                            <td width="130px"><span t-esc="attendance_census(docs)[3]"/></td>
+                            <td width="130px"><span t-esc="attendance_census(docs)[4]"/></td>
+                            <td width="130px"><span t-esc="attendance_census(docs)[5]"/></td>
                         </tr>
-                        </table>
+                    </table>
                     </div>
                 </t>
             </t>

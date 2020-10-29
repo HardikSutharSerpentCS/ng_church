@@ -2,8 +2,9 @@
 {
     'name': 'Church Management',
     'version': '13.0.1.0.1',
-    'author': 'Matt \'O Bell, Serpent Consulting Services Pvt. Ltd.',
+    'author': 'Serpent Consulting Services Pvt. Ltd.',
     'website': 'https://www.serpentcs.com',
+    'sequence': 1,
     'summary': """
         Church Management""",
     'description': """
@@ -15,6 +16,7 @@ Church Management
             'views/menus.xml',
             'security/ng_church_security.xml',
             'security/ir.model.access.csv',
+            'data/ng_church_demo_data.xml',
             'views/membership_view.xml',
             'views/followup.xml',
             'views/inherited/account_invoice_view.xml',
@@ -44,10 +46,9 @@ Church Management
         'sale',
         'purchase',
         'crm',
-        'project',
+        'project'
     ],
     'category': 'Human Resources',
     'application': True,
     'installable': True,
-    'auto_install': False
 }

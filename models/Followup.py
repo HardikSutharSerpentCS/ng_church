@@ -23,8 +23,8 @@ class MemberFollowUp(models.Model):
 
     name = fields.Many2one('res.partner', string='Member')
     email = fields.Char(related='name.email', string='Email')
-    phone = fields.Char(related='name.mobile', string='Phone')
-    next_activity_id = fields.Many2one('crm.activity', string='Activity')
+    phone = fields.Char(related='name.phone', string='Phone')
+    next_activity_id = fields.Many2one('mail.activity.type', string='Activity')
     stage_id = fields.Many2one('ng_church.member_stage', string='Stage',
                                index=True, track_visibility='onchange',
                                group_expand='_read_group_stage_ids',
@@ -74,8 +74,8 @@ class FirstTimerFollowUp(models.Model):
 
     name = fields.Many2one('res.partner', string='First Timer')
     email = fields.Char(related='name.email', string='Email')
-    phone = fields.Char(related='name.mobile', string='Phone')
-    next_activity_id = fields.Many2one('crm.activity', string='Activity')
+    phone = fields.Char(related='name.phone', string='Phone')
+    next_activity_id = fields.Many2one('mail.activity.type', string='Activity')
     stage_id = fields.Many2one('ng_church.first_timer_stage', string='Stage',
                                index=True, track_visibility='onchange',
                                group_expand='_read_group_stage_ids',

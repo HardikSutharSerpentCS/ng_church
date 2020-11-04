@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Church Management',
-    'version': '13.0.1.0.1',
+    'version': '14.0.1.0.1',
     'author': 'Serpent Consulting Services Pvt. Ltd.',
     'website': 'https://www.serpentcs.com',
     'sequence': 1,
@@ -37,7 +37,6 @@ Church Management
             'report/church_tithe_report.xml',
             'report/church_offering_report.xml',
             'report/church_donation_report.xml',
-            'report/payment_receipt_inherit.xml',
             'views/ng_church_program.xml',
             'views/ng_church_lodgement.xml'
     ],

@@ -54,8 +54,10 @@ class Company(models.Model):
 
     _inherit = 'res.company'
 
-    account = [('user_type_id', '=', 14)]
-    journal = [('type', '=', 'sale')]
+    # account = [('user_type_id', '=', 14)]
+    journal = [('type', 'in', ['bank','cash'])]
+    account = [('user_type_id.type', 'in', ['receivable','payable'])]
+
 
     name = fields.Char(string='Church Name', required=True)
     rml_header1 = fields.Char(string='Church Tagline ')
@@ -69,7 +71,7 @@ class Company(models.Model):
         'ng_church.tithe', 'church_id', string='Church Tithes')
 
     tithe_journal = fields.Many2one(
-        'account.journal', string="Journal", domain=journal)
+        'account.journal', string="Journal",domain=journal)
     tithe_account = fields.Many2one(
         'account.account', string="Account", domain=account)
     donation_journal = fields.Many2one(

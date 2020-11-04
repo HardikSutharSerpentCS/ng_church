@@ -18,16 +18,16 @@
                     </thead>
                   <tbody class='sale_tbody'>
                         <t t-foreach="doc" t-as="pledges">
-                          <t t-foreach="pledges.pledge_line_ids" t-as="pledger">
+                          <t t-foreach="pledges.pledge_line_ids" t-as="pledge">
                             <tr class="row">
-                                <td width="150px" margin-left="150px"><span t-field="pledges.name"/></td>
-                                <td width="150px"><span t-esc="pledger.pledger.name"/></td>
-                                <td width="150px"><span t-esc="pledger.amount"/></td>
-                                <td width="150px"><span t-field="pledger.paid"/></td>
-                                <td width="150px"><span t-field="pledger.balance"/></td>
+                                <td width="150px" margin-left="150px"><span t-field="pledge.name"/></td>
+                                <td width="150px"><span t-esc="pledge.pledger.name"/></td>
+                                <td width="150px"><span t-esc="pledge.amount"/></td>
+                                <td width="150px"><span t-field="pledge.paid"/></td>
+                                <td width="150px"><span t-field="pledge.balance"/></td>
                              </tr>
+                           </t>
                         </t>
-                      </t>
                     </tbody>
                 </table>
             </div>

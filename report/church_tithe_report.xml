@@ -18,18 +18,20 @@
                              </thead>
                              <tbody class='sale_tbody'>
                                <t t-foreach="docs" t-as="tithes">
+                                <t t-foreach="tithes.tithe_line_ids" t-as="tithe">
                                     <tr class="row">
-                                        <td width="150px" margin-left="150px"><span t-field="tithes.date"/></td>
-                                        <td width="150px"><span t-field="tithes.tithe_type"/></td>
-                                        <td width="150px"><span t-field="tithes.tither"/></td>
-                                        <td width="150px"><span t-field="tithes.amount"/></td>
+                                        <td width="150px" margin-left="150px"><span t-esc="tithe.date"/></td>
+                                        <td width="150px"><span t-field="tithe.tithe_type"/></td>
+                                        <td width="150px"><span t-field="tithe.tither"/></td>
+                                        <td width="150px"><span t-field="tithe.amount"/></td>
                                     </tr>
+                                  </t>
                                </t>
                                    <tr class="row">
                                        <td width="150px" margin-left="150px"></td>
                                        <td width="150px"></td>
                                        <td width="150px"><b>Total</b></td>
-                                       <td width="150px"><t t-esc="tithe_caculator(docs)"/></td>
+                                       <td width="150px"><t t-esc="tithe_caculator(docs.tithe_line_ids)"/></td>
                                    </tr>
                                 </tbody>
                             </table>

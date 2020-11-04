@@ -13,17 +13,19 @@ class ChurchTitheLineAbstractModel(models.AbstractModel):
     _description = "Report NG Church Tithe"
 
     def tithe_caculator(self, model):
+        
         """tithe_caculator."""
         return sum(tithe.amount for tithe in model)
 
     @api.model
     def _get_report_values(self, docids, data=None):
         docs = self.env['ng_church.tithe'].browse(docids)
+
         return {
-        'doc_ids': docs.ids,
-        'doc_model': 'ng_church.tithe',
-        'docs': self.env['ng_church.tithe_lines'].browse(docids),
-        'tithe_caculator': self.tithe_caculator
+            'doc_ids': docs.ids,
+            'doc_model': 'ng_church.tithe',
+            'docs': self.env['ng_church.tithe'].browse(docids),
+            "tithe_caculator" : self.tithe_caculator,
         }
 
     # @api.model
@@ -79,6 +81,7 @@ class TitheReportWizard(models.Model):
         tithes = self._report_range(self.env['ng_church.tithe_lines'].search(
             domain), self.date_from, self.date_to)
         if len(tithes) > 0:
-            return self.env['report'].\
-                get_action(tithes, 'ng_church.church_tithe_report')
+
+            return self.env.ref('ng_church.ng_church_tithe_line_report').report_action(tithes)
+
         raise MissingError('Record not found')

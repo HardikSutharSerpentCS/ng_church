@@ -25,7 +25,6 @@ month_list = [
 
 def program_default_date(self, date=datetime.date.today()):
     """ISO weekday."""
-    print(self.name)
     if(str(self.name) != 'ng_church.program()'):
         if self.name.days is False:
             raise MissingError('Service day is not set on the selected Church Program')

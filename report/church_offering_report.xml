@@ -6,7 +6,7 @@
                       <t t-foreach="doc" t-as="docs">
                         <div class="page">
                             <h2 class="text-center" style="text-transform:uppercase">Offering REPORT</h2>
-                            <h5 class="text-center" style="text-transform:uppercase"><u><span t-field="docs.offering_id.service_id.name"/></u></h5>
+                            <h5 class="text-center" style="text-transform:uppercase"><u><span t-esc="docs.service_id.name"/></u></h5>
                             <table class="table" style="width:100%;">
                               <thead>
                                <tr class="row">
@@ -18,18 +18,20 @@
                              </thead>
                              <tbody class='sale_tbody'>
                                 <t t-foreach="docs" t-as="offering">
+                                  <t t-foreach="offering.offering_line_ids" t-as="offer">
                                     <tr class="row">
-                                        <td width="150px" margin-left="150px"><span t-field="offering.date"/></td>
-                                        <td width="150px"><span t-esc="docs.offering_id.name.name"/></td>
-                                        <td width="150px"><span t-esc="docs.offering_id.section_id.name"/></td>
-                                        <td width="150px"><span t-field="offering.amount"/></td>
+                                        <td width="150px" margin-left="150px"><span t-field="offer.date"/></td>
+                                        <td width="150px"><span t-esc="docs.name.name"/></td>
+                                        <td width="150px"><span t-esc="docs.section_id.name"/></td>
+                                        <td width="150px"><span t-field="offer.amount"/></td>
                                     </tr>
+                                  </t>
                                </t>
                                   <tr class="row">
                                        <td width="150px" margin-left="150px"></td>
                                        <td width="150px"></td>
                                        <td width="150px"><b>Total</b></td>
-                                       <td width="150px"><b t-esc="offering_caculator(docs)"/></td>
+                                       <td width="150px"><b t-esc="offering_caculator(docs.offering_line_ids)"/></td>
                                    </tr>
                               </tbody>
                             </table>

@@ -11,13 +11,13 @@
                         <h5 class="text-center" style="text-transform:uppercase"><u><span t-field="doc.attendance_id.name"/></u></h5>
                         <table class="table" >
                             <tr class="row" >
-                                <th width="150px" margin-left="150px">Date</th>
-                                <th width="150px">Church Section</th>
-                                <th width="150px">Male</th>
-                                <th width="150px">Female</th>
-                                <th width="150px">Children</th>
-                                <th width="150px">Guest</th>
-                                <th width="150px">Total</th>
+                                <td width="150px" margin-left="150px">Date</td>
+                                <td width="150px">Church Section</td>
+                                <td width="150px">Male</td>
+                                <td width="150px">Female</td>
+                                <td width="150px">Children</td>
+                                <td width="150px">Guest</td>
+                                <td width="150px">Total</td>
                             </tr>
                          <t t-foreach="attendance_line_mutator(docs)[1::]" t-as="line_att">
                             <t t-foreach="line_att" t-as="line">

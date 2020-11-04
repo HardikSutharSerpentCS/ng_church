@@ -6,7 +6,7 @@
                       <t t-foreach="doc" t-as="docs">
                         <div class="page">
                             <h2 class="text-center" style="text-transform:uppercase">DONATION REPORT</h2>
-                            <h5 class="text-center" style="text-transform:uppercase"><u><span t-field="doc.donation_id.name"/></u></h5>
+                            <h5 class="text-center" style="text-transform:uppercase"><u><span t-field="doc.name.name"/></u></h5>
                             <table class="table" style="width:100%;">
                               <thead>
                                <tr class="row">
@@ -18,18 +18,20 @@
                                </thead>
                                <tbody class='sale_tbody'>
                                 <t t-foreach="docs" t-as="donation">
+                                  <t t-foreach="donation.donation_line_ids" t-as="donation_line">
                                     <tr class="row">
-                                        <td width="150px" margin-left="150px"><span t-field="donation.name"/></td>
-                                        <td width="150px"><span t-field="donation.donor_id"/></td>
+                                        <td width="150px" margin-left="150px"><span t-field="donation_line.name"/></td>
+                                        <td width="150px"><span t-field="donation_line.donor_id"/></td>
                                         <td width="150px"></td>
-                                        <td width="150px"><span t-field="donation.amount"/></td>
+                                        <td width="150px"><span t-field="donation_line.amount"/></td>
                                     </tr>
                                </t>
+                             </t>
                                   <tr class="row">
                                        <td width="150px" margin-left="150px"></td>
                                        <td width="150px" margin-left="150px"></td>
                                        <td width="150px" margin-left="150px"><b>Total</b></td>
-                                       <td width="150px" margin-left="150px"><b t-esc="donation_caculator(docs)"/></td>
+                                       <td width="150px" margin-left="150px"><b t-esc="donation_caculator(docs.donation_line_ids)"/></td>
                                    </tr>
                               </tbody>
                             </table>

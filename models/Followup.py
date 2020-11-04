@@ -21,12 +21,16 @@ class MemberFollowUp(models.Model):
     _name = 'ng_church.followup_member'
     _description = "NG Church Followup Member"
 
+    def _valid_field_parameter(self, field, name):
+        # I can't even
+        return name == 'tracking' or super()._valid_field_parameter(field, name)
+
     name = fields.Many2one('res.partner', string='Member')
     email = fields.Char(related='name.email', string='Email')
     phone = fields.Char(related='name.phone', string='Phone')
     next_activity_id = fields.Many2one('mail.activity.type', string='Activity')
     stage_id = fields.Many2one('ng_church.member_stage', string='Stage',
-                               index=True, track_visibility='onchange',
+                               index=True, tracking=True,
                                group_expand='_read_group_stage_ids',
                                default=_default_stage)
     priority = fields.Selection(AVAILABLE_PRIORITIES, string='Priority',
@@ -72,12 +76,16 @@ class FirstTimerFollowUp(models.Model):
     _name = 'ng_church.followup_first_timer'
     _description = "NG Church Followup First Timer"
 
+    def _valid_field_parameter(self, field, name):
+        # I can't even
+        return name == 'tracking' or super()._valid_field_parameter(field, name)
+
     name = fields.Many2one('res.partner', string='First Timer')
     email = fields.Char(related='name.email', string='Email')
     phone = fields.Char(related='name.phone', string='Phone')
     next_activity_id = fields.Many2one('mail.activity.type', string='Activity')
     stage_id = fields.Many2one('ng_church.first_timer_stage', string='Stage',
-                               index=True, track_visibility='onchange',
+                               index=True, tracking=True,
                                group_expand='_read_group_stage_ids',
                                default=_default_stage)
     priority = fields.Selection(AVAILABLE_PRIORITIES, string='Priority',

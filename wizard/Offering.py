@@ -61,7 +61,7 @@ class ChurchOfferingLineAbstractModel(models.AbstractModel):
         return {
         'doc_ids': docs.ids,
         'doc_model': 'ng_church.offering',
-        'docs': self.env['ng_church.offering_line'].browse(docids),
+        'docs': self.env['ng_church.offering'].browse(docids),
         'offering_caculator': self.offering_caculator
         }
 
@@ -104,6 +104,6 @@ class OfferingReportWizard(models.Model):
         offerings = self._report_range(
             offering_line, self.date_from, self.date_to)
         if len(offerings) > 0:
-            return self.env['report'].\
-                get_action(offerings, 'ng_church.church_offering_report')
+            return self.env.ref('ng_church.ng_church_offering_report').report_action(offerings)
+
         raise MissingError('Record not found')

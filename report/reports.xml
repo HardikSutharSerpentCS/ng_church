@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="paperformat_tithe_report" model="report.paperformat">
+        <record id="paperformat_tithe_report" model="report.paperformat">
             <field name="name">A4</field>
             <field name="default" eval="True"/>
             <field name="format">A5</field>
@@ -16,88 +16,71 @@
             <field name="dpi">90</field>
         </record>
 
-        <report id="pledge_report_reg"
-                name="ng_church.print_pledge_report" string="Pledge Balance"
-                model="ng_church.pledge_line"
-                file="ng_church.print_pledge_report"
-                report_type='qweb-pdf'/>
-
         <record id="pledge_report_reg" model="ir.actions.report">
-            <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="name">Pledge Balance</field>
+                <field name="model">ng_church.pledge_line</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="binding_model_id" ref="model_ng_church_pledge_line"/>
+                <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="report_name">ng_church.print_pledge_report</field>
+                <field name="report_file">ng_church.print_pledge_report</field>
+                
         </record>
     
-        <!-- <report id="action_report_pricelist"
-                name="ng_church.action_report_pricelist" string="Pledge Balance"
-                model="ng_church.pledge_line"
-                file="ng_church.action_report_pricelist"
-                report_type='qweb-pdf'/>
- -->
-        <!-- <report id="payment_receipt_inherit_main" inherit_id="account.report_payment_receipt"
-                name="account.report_payment_receipt" string="Payment Receipt"
-                model="account.payment"
-                file="account.report_payment_receipt"
-                report_type='qweb-pdf'/> -->
-
-        <record id="account.action_report_payment_receipt" model="ir.actions.report">
-            <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
-        </record>
 
         <record id="ng_church_pledges_report" model="ir.actions.report">
-            <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="name">Pledge Payments Report</field>
+                <field name="model">ng_church.pledge</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="binding_model_id" ref="model_ng_church_pledge"/>
+                <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="report_name">ng_church.church_pledges_report</field>
+                <field name="report_file">ng_church.church_pledges_report</field>
+                <field name="binding_type">report</field>
         </record>
-
-        <report id="ng_church_pledges_report"
-                model="ng_church.pledge"
-                string="Pledge Payments Report"
-                name="ng_church.church_pledges_report"
-                file="ng_church.church_pledges_report"
-                report_type="qweb-pdf"/>
-
+      
         <record id="ng_church_attendance_line_report" model="ir.actions.report">
-            <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="name">Church Services Attendance</field>
+                <field name="model">ng_church.attendance</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="binding_model_id" ref="model_ng_church_attendance"/>
+                <field name="report_name">ng_church.church_attendance_report</field>
+                <field name="report_file">ng_church.church_attendance_report</field>
+                <field name="binding_type">report</field>
         </record>
-
-        <report id="ng_church_attendance_line_report"
-                model="ng_church.attendance"
-                string="Church Services Attendance"
-                name="ng_church.church_attendance_report"
-                file="ng_church.church_attendance_report"
-                report_type="qweb-pdf"/>
-
-        <record id="ng_church_tithe_line_report" model="ir.actions.report">
-            <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
-        </record>
-
-        <report id="ng_church_tithe_line_report"
-                model="ng_church.tithe"
-                string="Tithes Report"
-                name="ng_church.church_tithe_report"
-                file="ng_church.church_tithe_report"
-                report_type="qweb-pdf"/>
-
-        <record id="ng_church_offering_report" model="ir.actions.report">
-            <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
-        </record>
-
-        <report id="ng_church_offering_report"
-                model="ng_church.offering"
-                string="Offering Report"
-                name="ng_church.church_offering_report"
-                file="ng_church.church_offering_report"
-                report_type="qweb-pdf"/>
-
-        <record id="ng_church_donation_report" model="ir.actions.report">
-            <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
-        </record>
-
-        <report id="ng_church_donation_report"
-                model="ng_church.donation"
-                string="Donation Report"
-                name="ng_church.church_donation_report"
-                file="ng_church.church_donation_report"
-                report_type="qweb-pdf" />
 
         
+        <record id="ng_church_tithe_line_report" model="ir.actions.report">
+                <field name="name">Tithes Report</field>
+                <field name="model">ng_church.tithe</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="binding_model_id" ref="model_ng_church_tithe"/>
+                <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="report_name">ng_church.church_tithe_report</field>
+                <field name="report_file">ng_church.church_tithe_report</field>
+                <field name="binding_type">report</field>
+        </record>
 
-    
+        <record id="ng_church_offering_report" model="ir.actions.report">
+                <field name="name">Offering Report</field>
+                <field name="model">ng_church.offering</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="binding_model_id" ref="model_ng_church_offering"/>
+                <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="report_name">ng_church.church_offering_report</field>
+                <field name="report_file">ng_church.church_offering_report</field>
+                <field name="binding_type">report</field>
+        </record>
+
+        <record id="ng_church_donation_report" model="ir.actions.report">
+                <field name="name">Donation Report</field>
+                <field name="model">ng_church.donation</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="binding_model_id" ref="model_ng_church_donation"/>
+                <field name="paperformat_id" ref="ng_church.paperformat_tithe_report"/>
+                <field name="report_name">ng_church.church_donation_report</field>
+                <field name="report_file">ng_church.church_donation_report</field>
+                <field name="binding_type">report</field>
+        </record>
+
 </odoo>

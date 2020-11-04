@@ -8,6 +8,7 @@
 			<field name="model">ng_church.attendance</field>
 			<field name="arch" type="xml">
 				<search>
+					<field name='name'/>
 					<filter name='Partner' string="Partner" context="{'group_by':'parish_id'}"/>
 					<filter string="Parish" name="parish_id" domain="[('parish_id', '=', 2)]"/>
 				</search>
@@ -97,6 +98,7 @@
 						</group>
 						</group>
 					</sheet>
+					
 				</form>
 			</field>
         </record>

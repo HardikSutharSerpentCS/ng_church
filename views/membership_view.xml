@@ -334,7 +334,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.res_partner_kanban_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//li[6]" position="after">
+                <xpath expr="//li[5]" position="after">
                     <li t-if="record.member_uniq_id.raw_value"  style="color:#006400;"><field name="member_uniq_id"/></li>
                 </xpath>
             </field>

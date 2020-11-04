@@ -50,5 +50,5 @@ class ChurchPledgeReport(models.TransientModel):
         """."""
         report = self.pledge.name.name
         pledges = self.env['ng_church.pledge'].search([('name', '=', report)])
-        return self.env['report'].\
-            get_action(pledges, 'ng_church.church_pledges_report', data={})
+        return self.env.ref('ng_church.ng_church_pledges_report').report_action(pledges)
+

@@ -42,7 +42,6 @@ class Lodgement(models.Model):
         return account_move
 
     def _prepare_first_account_move_line(self, move_id):
-        print("self.journal_id.default_debit_account_id.id,",self.amount)
         payload = {
             'name': self.description,
             'journal_id': self.journal_id.id,
@@ -60,14 +59,14 @@ class Lodgement(models.Model):
 
     def _prepare_second_account_move_line(self, move_id):
         if self and self.journal_id and \
-                not self.journal_id.default_debit_account_id:
+                not self.journal_id.default_account_id:
             raise MissingError('{} default debit and credit'
                                ' are not set.'.format(self.journal_id.name))
 
 
         payload = {
             'name': self.description,
-            'account_id': self.journal_id.default_debit_account_id.id,
+            'account_id': self.journal_id.default_account_id.id,
             'move_id': move_id,
             'partner_id': parish(self),
             'quantity': 1,

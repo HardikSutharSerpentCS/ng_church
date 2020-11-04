@@ -35,8 +35,8 @@ class ChurchDonationLineAbstractModel(models.AbstractModel):
         docs = self.env['ng_church.donation'].browse(docids)
         return {
         'doc_ids': docs.ids,
-        'doc_model': 'ng_church.offering',
-        'docs': self.env['ng_church.donation_line'].browse(docids),
+        'doc_model': 'ng_church.donation',
+        'docs': self.env['ng_church.donation'].browse(docids),
         'donation_caculator': self.donation_caculator
         }
 
@@ -57,8 +57,9 @@ class DonationReportWizard(models.Model):
         church = [('church_id', '=', self.env.user.company_id.id),
                   ('id', '=', self.donation.id)]
         donation = self.donation.search(church).donation_line_ids
-        donations = _report_range(donation, self.date_from, self.date_to)
+        donations = _report_range(self.donation,donation, self.date_from, self.date_to)
         if len(donations) > 0:
-            return self.env['report'].\
-                get_action(donations, 'ng_church.church_donation_report')
+            # return self.env.ref('ng_church.ng_church_attendance_line_report').report_action(self)
+
+            return self.env.ref('ng_church.ng_church_attendance_line_report').report_action(donations)
         raise MissingError('Record not found')

@@ -51,7 +51,6 @@ class ChurchAttendanceLineAbstractModel(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        print("::::docids", docids)
         docs = self.env['ng_church.attendance'].browse(docids)
 
         return {
@@ -128,23 +127,19 @@ class ChurchAttendanceLine(models.TransientModel):
             attendance_line_to = attendance_line_from.filtered(
                 lambda r: r.date <= self.date_to)
             self._report_exist(attendance_line_to)
-            return self.env['report'].\
-                get_action(attendance_line_to,
-                           'ng_church.church_attendance_report')
+            return self.env.ref('ng_church.ng_church_attendance_line_report').report_action(self)
+        
         elif self.date_from:
             attendance_line_from = report.filtered(
                 lambda r: r.date >= self.date_from)
             self._report_exist(attendance_line_from)
-            return self.env['report'].\
-                get_action(attendance_line_from,
-                           'ng_church.church_attendance_report')
+            return self.env.ref('ng_church.ng_church_attendance_line_report').report_action(self)
+
         elif self.date_to:
             attendance_line_to = report.filtered(
                 lambda r: r.date <= self.date_to)
             self._report_exist(attendance_line_to)
-            return self.env['report'].\
-                get_action(attendance_line_to,
-                           'ng_church.church_attendance_report')
-        return self.env['report'].\
-            get_action(report,
-                       'ng_church.church_attendance_report')
+            return self.env.ref('ng_church.ng_church_attendance_line_report').report_action(self)
+
+        return self.env.ref('ng_church.ng_church_attendance_line_report').report_action(self)
+
